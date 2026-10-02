@@ -1,0 +1,21 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  line cap=round,
+  line join=round
+]
+  \draw[->,gray] (-3.5,0) -- (2.0,0) node[right] {$\operatorname{Re}$};
+  \draw[->,gray] (0,-1.7) -- (0,1.7) node[above] {$\operatorname{Im}$};
+  \draw[red!70!black,dashed,very thick] (-3.25,0) -- (0,0)
+    node[midway,below] {corte de rama};
+  \fill[blue!70!black] (-2.4,0.55) circle (1.7pt)
+    node[above left] {$z_+$};
+  \fill[orange!85!black] (-2.4,-0.55) circle (1.7pt)
+    node[below left] {$z_-$};
+  \draw[->,blue!70!black,thick] (0.65,0) arc[start angle=0,end angle=167,radius=0.65]
+    node[midway,above right] {$\operatorname{Arg}(z_+)\to\pi$};
+  \draw[->,orange!85!black,thick] (0.95,0) arc[start angle=0,end angle=-167,radius=0.95]
+    node[midway,below right] {$\operatorname{Arg}(z_-)\to-\pi$};
+  \node[align=center] at (1.0,1.45) {$\operatorname{Arg}(z)\in(-\pi,\pi]$\\
+    al cruzar el eje real negativo\\la rama salta en $2\pi$};
+\end{tikzpicture}

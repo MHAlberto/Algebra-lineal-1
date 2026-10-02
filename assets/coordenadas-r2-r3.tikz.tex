@@ -1,0 +1,38 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  line cap=round,
+  line join=round
+]
+  % El mismo vector se representa en el plano y en el espacio.
+  \begin{scope}
+    \draw[->,gray] (-0.25,0) -- (3.2,0) node[right] {$x_1$};
+    \draw[->,gray] (0,-0.25) -- (0,2.25) node[above] {$x_2$};
+    \draw[densely dashed,gray] (2,1) -- (2,0);
+    \draw[densely dashed,gray] (2,1) -- (0,1);
+    \draw[->,blue!70!black,very thick] (0,0) -- (2,1)
+      node[above right] {$x=(2,1)$};
+    \fill[blue!70!black] (2,1) circle (1.5pt);
+    \node[font=\bfseries] at (1.35,2.65) {$\mathbb{R}^2$};
+    \node[align=center] at (1.35,-0.65) {punto o vector\\en el plano};
+  \end{scope}
+
+  \begin{scope}[
+    xshift=6.4cm,
+    x={(0.95cm,0cm)},
+    y={(0.32cm,0.2cm)},
+    z={(0cm,0.9cm)}
+  ]
+    \draw[->,gray] (-0.2,0,0) -- (3.0,0,0) node[right] {$x_1$};
+    \draw[->,gray] (0,-0.2,0) -- (0,2.1,0) node[right] {$x_2$};
+    \draw[->,gray] (0,0,-0.2) -- (0,0,2.7) node[above] {$x_3$};
+    \draw[densely dashed,gray] (2,1,2) -- (2,1,0);
+    \draw[densely dashed,gray] (2,1,0) -- (2,0,0);
+    \draw[densely dashed,gray] (2,1,0) -- (0,1,0);
+    \draw[->,blue!70!black,very thick] (0,0,0) -- (2,1,2)
+      node[above right] {$y=(2,1,2)$};
+    \fill[blue!70!black] (2,1,2) circle (1.5pt);
+    \node[font=\bfseries] at (1.15,0,2.7) {$\mathbb{R}^3$};
+    \node[align=center] at (1.15,-0.55,-0.45) {punto o vector\\en el espacio};
+  \end{scope}
+\end{tikzpicture}

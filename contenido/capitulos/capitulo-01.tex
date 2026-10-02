@@ -1,0 +1,379 @@
+\chapter{Campos y espacios vectoriales}
+\label{cap:campos-espacios}
+
+El álgebra lineal estudia conjuntos con operaciones que permiten sumar vectores y multiplicarlos por escalares. Nos centraremos en espacios vectoriales de dimensión finita: aquellos que tienen una base con un número finito de vectores. El conjunto de vectores puede tener infinitos elementos; por ejemplo, $\mathbb{R}^2$ sí tiene dimensión finita. Estas estructuras dan un marco común para estudiar matrices, sistemas de ecuaciones lineales y transformaciones lineales.
+\section{Campos y operaciones algebraicas}
+Antes de introducir los espacios vectoriales debemos precisar de dónde provienen sus escalares. Trabajaremos principalmente con los racionales $\mathbb{Q}$, los reales $\mathbb{R}$ y los complejos $\mathbb{C}$. Los tres son ejemplos de campos: conjuntos en los que se puede sumar, restar, multiplicar y dividir por cualquier elemento distinto de cero, conservando las reglas algebraicas usuales.
+\begin{definition}
+Sea $K$ un conjunto no vacío provisto de dos operaciones
+\(+\colon K\times K\to K\) y \(\cdot\colon K\times K\to K\).
+Diremos que $(K,+,\cdot)$ es un \indexemph{campo} si para cualesquiera $a,b,c\in K$ se satisfacen las siguientes propiedades:
+\begin{enumerate}
+\item La suma es asociativa y conmutativa: $(a+b)+c=a+(b+c)$ y $a+b=b+a$.
+\item Existe un neutro aditivo $0\in K$, con $a+0=a$, y cada $a\in K$ tiene un inverso $-a\in K$, con $a+(-a)=0$.
+\item El producto es asociativo y conmutativo: $(ab)c=a(bc)$ y $ab=ba$.
+\item Existe un neutro multiplicativo $1\in K$, con $1\neq0$ y $a1=a$. Cada $a\neq0$ tiene un inverso multiplicativo $a^{-1}$, con $aa^{-1}=1$.
+\item El producto distribuye sobre la suma: $a(b+c)=ab+ac$.
+\end{enumerate}
+\end{definition}
+\noindent En particular, la suma hace de $K$ un grupo abeliano, mientras que los elementos no nulos forman un grupo abeliano bajo el producto. Las aplicaciones $+$ y $\cdot$ ya incorporan el cierre de las operaciones en $K$.
+\begin{example}
+El conjunto $\mathbb{Q}$ de los racionales, con las operaciones usuales, es un campo: si $a\in\mathbb{Q}$ y $a\neq0$, entonces $a^{-1}=1/a\in\mathbb{Q}$.
+\end{example}
+\begin{example}
+Los conjuntos $\mathbb{R}$ y $\mathbb{C}$, con sus operaciones usuales, también son campos y serán nuestros escalares principales. Cuando una afirmación valga para ambos, escribiremos $K=\mathbb{R}$ o $K=\mathbb{C}$.
+\end{example}
+\begin{example}
+Si $p$ es primo, el conjunto $\mathbb{F}_p=\mathbb{Z}/p\mathbb{Z}$, con suma y producto módulo $p$, es un campo. Por ejemplo, $\mathbb{F}_2=\{0,1\}$ y $1+1=0$, mientras que $1\cdot1=1$. Así, un campo también puede tener un número finito de elementos.
+\end{example}
+\begin{example}
+Los enteros $\mathbb{Z}$ no forman un campo: aunque tienen las operaciones y los neutros usuales, $2$ no tiene inverso multiplicativo en $\mathbb{Z}$; no existe $n\in\mathbb{Z}$ tal que $2n=1$.
+\end{example}
+A partir de los axiomas de campo pueden deducirse numerosas propiedades que utilizamos de manera habitual en manipulaciones algebraicas.
+\begin{proposition}
+Sea $K$ un campo. Entonces se cumplen las siguientes propiedades:
+\begin{enumerate}
+\item[a)] El elemento neutro aditivo es único.
+\item[b)] Para cada $a\in K$, el inverso aditivo $-a$ es único.
+\item[c)] El elemento neutro multiplicativo es único.
+\item[d)] Para cada $a\in K\setminus\{0\}$, el inverso multiplicativo $a^{-1}$ es único.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Si $0$ y $0'$ son neutros aditivos, entonces $0=0+0'=0'$. Si $b$ y $c$ son inversos aditivos de $a$, se tiene $b=b+0=b+(a+c)=(b+a)+c=0+c=c$. Los mismos argumentos multiplicativos dan $1=1\cdot1'=1'$ y, si $ab=ac=1$ con $a\neq0$, entonces $b=b\cdot1=b(ac)=(ba)c=1\cdot c=c$. En cada caso, el elemento con la propiedad requerida es único.
+\end{proof}
+\begin{example}
+En $\mathbb{R}$, los inversos de $5$ son $-5$ y $5^{-1}=1/5$, pues $5+(-5)=0$ y $5(1/5)=1$. La proposición garantiza que no hay otros elementos con esas propiedades.
+\end{example}
+Una herramienta fundamental para resolver ecuaciones y realizar manipulaciones algebraicas es la ley de cancelación.
+\begin{proposition}[Ley de cancelación]
+Sea $K$ un campo y sean $a,b,c\in K$. Entonces:
+\begin{enumerate}
+\item[a)] Si $a+c=b+c$, entonces $a=b$.
+\item[b)] Si $c\neq0$ y $ac=bc$, entonces $a=b$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+En la primera igualdad sumamos $-c$ a ambos lados y obtenemos $a+c-c=b+c-c$, de donde $a=b$. En la segunda multiplicamos por $c^{-1}$: $acc^{-1}=bcc^{-1}$, así que también $a=b$.
+\end{proof}
+Las siguientes identidades, aunque elementales, aparecerán continuamente al trabajar con espacios vectoriales, matrices y transformaciones lineales.
+\begin{proposition}
+Sea $K$ un campo y sean $a,b\in K$. Entonces:
+\begin{enumerate}
+\item[a)] $a\cdot0=0$.
+\item[b)] $(-a)b=a(-b)=-(ab)$.
+\item[c)] $(-a)(-b)=ab$.
+\item[d)] $-(-a)=a$.
+\item[e)] $(-1)a=-a$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Por distributividad, $a\cdot0=a(0+0)=a\cdot0+a\cdot0$; al cancelar un sumando resulta $a\cdot0=0$. También $ab+(-a)b=(a-a)b=0$, de modo que $(-a)b=-(ab)$; análogamente, $a(-b)=-(ab)$. Aplicar estas identidades dos veces da $(-a)(-b)=ab$. La unicidad del inverso aditivo implica $-(-a)=a$ y, como $a+(-1)a=(1-1)a=0$, también $(-1)a=-a$.
+\end{proof}
+\begin{proposition}[Propiedad del producto nulo]
+Sean $a,b\in K$. Si $ab=0$, entonces $a=0$ o $b=0$.
+\end{proposition}
+\begin{proof}
+Si $a=0$, no hay nada que demostrar. Si $a\neq0$, multiplicamos $ab=0$ por $a^{-1}$ y obtenemos $b=a^{-1}0=0$.
+\end{proof}
+
+\section{Los campos \texorpdfstring{$\mathbb{R}$}{R} y \texorpdfstring{$\mathbb{C}$}{C}}
+Al hablar de un espacio vectorial siempre especificaremos su campo de escalares. En lo que sigue, $K$ denotará principalmente a $\mathbb{R}$ o a $\mathbb{C}$. Los complejos amplían a los reales al incorporar una solución de $x^2=-1$; al mismo tiempo, se pueden representar como puntos del plano. Esta doble lectura, algebraica y geométrica, será útil para entender las operaciones antes de generalizarlas a $K^n$.
+\begin{definition}
+El conjunto de los \indexemph{números complejos} es
+$\mathbb{C}=\{a+bi:a,b\in\mathbb{R}\}$, donde $i^2=-1$.
+Si $z=a+bi$, su \indexemph{parte real} y su \indexemph{parte imaginaria} son
+$\operatorname{Re}(z)=a$ e $\operatorname{Im}(z)=b$. La igualdad $a+bi=c+di$
+equivale a que $a=c$ y $b=d$.
+\end{definition}
+Identificamos $a+bi$ con el punto $(a,b)\in\mathbb{R}^2$. Esta correspondencia
+preserva la suma y la multiplicación por escalares reales, así que identifica
+$\mathbb{C}$ con $\mathbb{R}^2$ como espacios vectoriales sobre $\mathbb{R}$.
+El producto complejo, en cambio, tiene la regla propia
+$(a,b)(c,d)=(ac-bd,ad+bc)$.
+\begin{example}
+Si $z=3+2i$, entonces corresponde al punto $(3,2)$ y sus coordenadas son
+$\operatorname{Re}(z)=3$ e $\operatorname{Im}(z)=2$. De igual modo, $-4-7i$
+corresponde a $(-4,-7)$.
+\end{example}
+\begin{example}
+Todo real es un complejo cuya parte imaginaria es cero: $a=a+0i$, de modo que
+$\mathbb{R}\subseteq\mathbb{C}$. Por ejemplo, $5$ se representa como $(5,0)$.
+\end{example}
+La identificación con pares también hace visibles las operaciones. Al multiplicar,
+la regla resulta de distribuir y sustituir $i^2$ por $-1$.
+\begin{definition}[Aritmética de los números complejos]
+Si $z=a+bi$ y $w=c+di$, entonces
+$z+w=(a+c)+(b+d)i$ y $zw=(ac-bd)+(ad+bc)i$.
+En coordenadas, esto equivale a
+$(a,b)+(c,d)=(a+c,b+d)$ y $(a,b)(c,d)=(ac-bd,ad+bc)$.
+\end{definition}
+\begin{example}
+Para $z=2+3i$ y $w=4-i$, se obtiene $z+w=6+2i$ y
+$zw=(2+3i)(4-i)=8-2i+12i-3i^2=11+10i$.
+\end{example}
+\begin{figure}[htbp]
+  \centering
+  \input{assets/suma-compleja.tikz.tex}
+  \caption{La suma compleja se obtiene sumando las componentes, o trasladando uno de los vectores para completar el paralelogramo.}
+  \label{fig:suma-compleja}
+\end{figure}
+\begin{example}
+Como $i^2=-1$, las potencias se repiten cada cuatro términos:
+$i^{4k}=1$, $i^{4k+1}=i$, $i^{4k+2}=-1$ e $i^{4k+3}=-i$.
+\end{example}
+\begin{example}
+Para $z=1+2i$, tenemos $z^2=(1+2i)^2=1+4i+4i^2=-3+4i$.
+\end{example}
+Otra operación fundamental en $\mathbb{C}$ es la conjugación, la cual posee una interpretación geométrica sencilla: refleja un número complejo respecto del eje real en el plano complejo.
+\begin{definition}
+Si $z=a+bi\in\mathbb{C}$, su \indexemph{conjugado} es $\overline{z}=a-bi$.
+\end{definition}
+\begin{example}
+Por ejemplo, $\overline{3+5i}=3-5i$ y $\overline{-2-7i}=-2+7i$.
+En particular, $z\in\mathbb{R}$ si y sólo si $\overline{z}=z$.
+\end{example}
+\begin{proposition}
+Sean $z,w\in\mathbb{C}$. Entonces:
+\begin{enumerate}
+\item[a)] $\overline{\overline{z}}=z$.
+\item[b)] $\overline{z+w}=\overline{z}+\overline{w}$.
+\item[c)] $\overline{zw}=\overline{z}\,\overline{w}$.
+\item[d)] $\overline{z^{-1}}=(\overline{z})^{-1}$, siempre que $z\neq0$.
+\item[e)] $z+\overline{z}=2\operatorname{Re}(z)$.
+\item[f)] $z-\overline{z}=2i\operatorname{Im}(z)$.
+\item[g)] $z\overline{z}=(\operatorname{Re}z)^2+(\operatorname{Im}z)^2$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Al escribir $z=a+bi$ y $w=c+di$, cada identidad se verifica sustituyendo las definiciones; por ejemplo,
+$z\overline{z}=(a+bi)(a-bi)=a^2+b^2$.
+\end{proof}
+El conjugado permite definir la magnitud y la distancia en el plano complejo, usando la distancia euclidiana.
+\begin{definition}
+Para $z=a+bi$, su \indexemph{módulo} es $|z|=\sqrt{a^2+b^2}=\sqrt{z\overline{z}}$.
+La distancia entre $z,w\in\mathbb{C}$ se define como $d(z,w)=|z-w|$; por la
+identificación con $\mathbb{R}^2$, es la distancia euclidiana entre los puntos.
+\end{definition}
+\begin{proposition}
+Para cualesquiera $z,w\in\mathbb{C}$ se cumplen
+$|z|^2=z\overline{z}$, $|zw|=|z||w|$, $|\overline{z}|=|z|$ y
+$|z+w|\leq |z|+|w|$. Además, si $z\neq0$, entonces
+$z^{-1}=\overline{z}/|z|^2$.
+\end{proposition}
+\begin{proof}
+De $z\overline{z}=|z|^2$ y $\overline{zw}=\overline z\,\overline w$ se obtiene
+$|zw|^2=|z|^2|w|^2$, así que $|zw|=|z||w|$; la igualdad
+$|\overline z|=|z|$ se sigue del mismo cálculo. Para la desigualdad triangular,
+escribimos $|z+w|^2=|z|^2+|w|^2+2\operatorname{Re}(z\overline w)$ y usamos
+$\operatorname{Re}(z\overline w)\leq|z||w|$. Finalmente,
+$z\,\overline z/|z|^2=1$, por lo que $z^{-1}=\overline z/|z|^2$.
+\end{proof}
+\begin{example}
+Para $z=3+4i$, el módulo es $|z|=5$. Si $z=1+2i$ y $w=4+6i$, entonces
+$d(z,w)=|z-w|=|-3-4i|=5$. Finalmente, para $z=2+3i$,
+$z^{-1}=(2-3i)/13$.
+\end{example}
+\begin{figure}[htbp]
+  \centering
+  \input{assets/conjugado-modulo-complejo.tikz.tex}
+  \caption{El conjugado refleja $z$ respecto del eje real; el módulo es la distancia al origen.}
+  \label{fig:conjugado-modulo}
+\end{figure}
+\begin{figure}[htbp]
+  \centering
+  \input{assets/distancia-complejos.tikz.tex}
+  \caption{La distancia entre dos complejos es la longitud del segmento que une sus puntos en el plano.}
+  \label{fig:distancia-complejos}
+\end{figure}
+La representación cartesiana $z=a+bi$ también puede expresarse mediante la distancia al origen y el ángulo respecto del eje real positivo.
+\begin{definition}
+Sea $z=a+bi\neq0$. Un número $\theta\in\mathbb{R}$ es un \indexemph{argumento}
+de $z$ si $a=|z|\cos\theta$ y $b=|z|\sin\theta$. Si $\theta$ es uno de ellos,
+el conjunto de todos se denota por
+$\arg(z)=\{\theta+2k\pi:k\in\mathbb{Z}\}$. El único argumento en $(-\pi,\pi]$
+se llama \indexemph{argumento principal} y se denota por $\operatorname{Arg}(z)$.
+\end{definition}
+La notación $\arg(z)$ representa una familia de ángulos, mientras que
+$\operatorname{Arg}(z)$ elige uno. Esa elección es continua salvo al cruzar el
+eje real negativo, donde pasa de valores cercanos a $\pi$ a valores cercanos a
+$-\pi$; a este salto se le asocia el corte de la rama principal.
+\begin{figure}[htbp]
+  \centering
+  \input{assets/argumento-principal-ramas.tikz.tex}
+  \caption{La rama principal del argumento toma valores en $(-\pi,\pi]$ y presenta un salto a lo largo del eje real negativo.}
+  \label{fig:argumento-principal}
+\end{figure}
+\begin{example}
+Para $z=1+i$, se tiene $|z|=\sqrt2$ y un argumento es $\theta=\pi/4$.
+Por ello, $\arg(z)=\{\pi/4+2k\pi:k\in\mathbb{Z}\}$ y
+$\operatorname{Arg}(z)=\pi/4$.
+\end{example}
+Si $\theta$ es un argumento de $z\neq0$, entonces
+$z=|z|(\cos\theta+i\sin\theta)=|z|e^{i\theta}$, usando la identidad de Euler
+$e^{i\theta}=\cos\theta+i\sin\theta$. Esta es la \indexemph{forma polar} de $z$.
+\begin{proposition}
+Sean $z=r(\cos\theta+i\sin\theta)$ y $w=s(\cos\varphi+i\sin\varphi)$, con
+$r,s\geq0$. Entonces
+$zw=rs\bigl(\cos(\theta+\varphi)+i\sin(\theta+\varphi)\bigr)$.
+En particular, $|zw|=|z||w|$ y, si $z,w\neq0$,
+$\arg(zw)=\arg(z)+\arg(w)\pmod{2\pi}$.
+\end{proposition}
+\begin{proof}
+Al distribuir el producto y aplicar las identidades trigonométricas de suma,
+\[
+\begin{aligned}
+zw
+&=rs(\cos\theta+i\sin\theta)(\cos\varphi+i\sin\varphi)\\
+&=rs\bigl((\cos\theta\cos\varphi-\sin\theta\sin\varphi)
++i(\sin\theta\cos\varphi+\cos\theta\sin\varphi)\bigr)\\
+&=rs\bigl(\cos(\theta+\varphi)+i\sin(\theta+\varphi)\bigr).
+\end{aligned}
+\end{proof}
+La forma polar permite calcular potencias de números complejos de manera particularmente sencilla.
+\begin{proposition}
+Si $z=r(\cos\theta+i\sin\theta)$ y $n\in\mathbb{N}$, entonces
+$z^n=r^n\bigl(\cos(n\theta)+i\sin(n\theta)\bigr)$, o, equivalentemente,
+$(re^{i\theta})^n=r^ne^{in\theta}$.
+\end{proposition}
+\begin{definition}
+Sean $z\in\mathbb{C}$ y $n\geq1$. Un número $w\in\mathbb{C}$ es una
+\indexemph{raíz $n$-ésima} de $z$ si $w^n=z$. Para $z=0$, la única raíz es
+$w=0$. Si $z=r(\cos\theta+i\sin\theta)$ con $r>0$, sus $n$ raíces son
+\[
+w_k=r^{1/n}
+\left(
+\cos\frac{\theta+2k\pi}{n}
++i\sin\frac{\theta+2k\pi}{n}
+\right),
+\qquad k=0,\ldots,n-1.
+\]
+\end{definition}
+\begin{example}
+Las raíces cuadradas de $1$ son $1$ y $-1$.
+\end{example}
+\begin{example}
+Si $\omega=e^{2\pi i/3}$, las raíces cúbicas de $1$ son $1$, $\omega$ y
+$\omega^2$, es decir, $1$, $-\frac12+\frac{\sqrt3}{2}i$ y
+$-\frac12-\frac{\sqrt3}{2}i$. En el plano son vértices de un triángulo
+equilátero sobre la circunferencia unitaria.
+Geométricamente, estos puntos son los vértices de un triángulo equilátero sobre la circunferencia unitaria.
+\end{example}
+\begin{figure}[htbp]
+  \centering
+  \input{assets/raices-unidad.tikz.tex}
+  \caption{Las tres raíces cúbicas de la unidad se distribuyen con ángulos iguales sobre la circunferencia unitaria.}
+  \label{fig:raices-unidad}
+\end{figure}
+\begin{theorem}[Fórmula de De Moivre]
+Para todo $\theta\in\mathbb{R}$ y $n\in\mathbb{Z}$,
+$(\cos\theta+i\sin\theta)^n=\cos(n\theta)+i\sin(n\theta)$.
+Más generalmente, si $z=r(\cos\theta+i\sin\theta)$ con $r>0$, entonces
+$z^n=r^n\bigl(\cos(n\theta)+i\sin(n\theta)\bigr)$.
+\end{theorem}
+\begin{proof}
+Para $n\geq0$, aplicamos repetidamente la fórmula del producto en forma polar.
+Si $n=-m<0$, usamos
+$(\cos\theta+i\sin\theta)^{-1}=\cos(-\theta)+i\sin(-\theta)$ y aplicamos el
+caso positivo a la potencia $m$.
+\end{proof}
+\begin{example}
+Como $1+i=\sqrt2\,e^{i\pi/4}$, De Moivre da $(1+i)^8=(\sqrt2)^8e^{2\pi i}=16$.
+\end{example}
+\begin{example}
+Como $|\sqrt3+i|=2$ y $\operatorname{Arg}(\sqrt3+i)=\pi/6$, resulta
+$(\sqrt3+i)^3=8e^{i\pi/2}=8i$.
+\end{example}
+Los campos $\mathbb{R}$ y $\mathbb{C}$ sirven como escalares. A partir de cualquier
+campo $K$ obtenemos los espacios coordenados $K^n$, primeros ejemplos de espacios
+vectoriales de dimensión finita.
+\begin{definition}
+Sea $K$ un campo y $n\in\mathbb{N}$ con $n\geq1$. El conjunto de tuplas
+$K^n=\{(x_1,\ldots,x_n):x_j\in K\}$ se opera componente a componente:
+$(x_1,\ldots,x_n)+(y_1,\ldots,y_n)=(x_1+y_1,\ldots,x_n+y_n)$ y, para
+$\lambda\in K$, $\lambda(x_1,\ldots,x_n)=(\lambda x_1,\ldots,\lambda x_n)$.
+\end{definition}
+Con estas operaciones, $K^n$ es un espacio vectorial sobre $K$. Para $n>1$ sus
+elementos no forman un campo con estas operaciones: la multiplicación por
+escalares toma un escalar y un vector, $K\times K^n\to K^n$.
+\begin{example}
+En $\mathbb{R}^2$, con $x=(2,-1)$ e $y=(3,4)$, la suma es $x+y=(5,3)$ y el
+escalar $2$ produce $2x=(4,-2)$. Geométricamente, son vectores del plano.
+\end{example}
+\begin{example}
+En $\mathbb{R}^3$, para $x=(1,2,-1)$ e $y=(0,-3,4)$ se tiene
+$x+y=(1,-1,3)$ y $-2x=(-2,-4,2)$. Ahora las tuplas se representan como
+vectores en el espacio tridimensional.
+\end{example}
+\begin{figure}[htbp]
+  \centering
+  \input{assets/coordenadas-r2-r3.tikz.tex}
+  \caption{Las tuplas reales de dos y tres coordenadas se representan como puntos o vectores en el plano y en el espacio.}
+  \label{fig:coordenadas-r2-r3}
+\end{figure}
+\begin{example}
+En $\mathbb{C}^2$, sean $z=(1+i,2-i)$ y $w=(3,-i)$. Entonces
+$z+w=(4+i,2-2i)$. Para $\lambda=1+i$,
+$\lambda z=((1+i)^2,(1+i)(2-i))=(2i,3+i)$.
+\end{example}
+\begin{example}
+En general, si
+\[
+x=(x_1,\ldots,x_n),\qquad y=(y_1,\ldots,y_n)\in K^n
+\]
+y $\alpha,\beta\in K$, entonces
+\[
+\alpha x+\beta y
+=
+(\alpha x_1+\beta y_1,\ldots,\alpha x_n+\beta y_n).
+\]
+Esta expresión será una de las operaciones fundamentales del álgebra lineal y posteriormente recibirá el nombre de combinación lineal de $x$ e $y$.
+\end{example}
+\begin{proposition}
+Sea $K$ un campo. Para cualesquiera $x,y,z\in K^n$ y $\alpha,\beta\in K$ se cumplen
+\begin{enumerate}
+\item[a)] $x+y=y+x$.
+\item[b)] $(x+y)+z=x+(y+z)$.
+\item[c)] Existe $0=(0,\ldots,0)\in K^n$ tal que $x+0=x$.
+\item[d)] Para cada $x=(x_1,\ldots,x_n)$ existe
+\[
+-x=(-x_1,\ldots,-x_n)
+\]
+tal que $x+(-x)=0$.
+\item[e)] $\alpha(x+y)=\alpha x+\alpha y$.
+\item[f)] $(\alpha+\beta)x=\alpha x+\beta x$.
+\item[g)] $(\alpha\beta)x=\alpha(\beta x)$.
+\item[h)] $1x=x$.
+\end{enumerate}
+\end{proposition}
+\begin{proof}
+Todas las identidades se verifican componente a componente utilizando únicamente los axiomas del campo $K$. Por ejemplo,
+\[
+\alpha(x+y)
+=
+\alpha(x_1+y_1,\ldots,x_n+y_n)
+\]
+\[
+=
+(\alpha(x_1+y_1),\ldots,\alpha(x_n+y_n))
+\]
+\[
+=
+(\alpha x_1+\alpha y_1,\ldots,\alpha x_n+\alpha y_n)
+=
+\alpha x+\alpha y.
+\]
+Las demás propiedades se demuestran de manera análoga.
+\end{proof}
+
+\section{Definición de espacio vectorial}
+Axiomas de suma de vectores y multiplicación por escalares sobre un campo.
+
+\section{Ejemplos fundamentales de espacios vectoriales}
+Espacios coordenados, polinomios, matrices, funciones y sucesiones.
+
+\section{Subespacios vectoriales}
+Criterios de subespacio, ejemplos y contraejemplos.
+
+\section{Intersección y suma de subespacios}
+Operaciones entre subespacios, suma directa y primeros ejemplos de descomposición.

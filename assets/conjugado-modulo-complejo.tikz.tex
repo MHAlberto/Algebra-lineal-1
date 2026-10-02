@@ -1,0 +1,19 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  line cap=round,
+  line join=round
+]
+  \draw[->,gray] (-0.45,0) -- (3.5,0) node[right] {$\operatorname{Re}$};
+  \draw[->,gray] (0,-2.0) -- (0,2.5) node[above] {$\operatorname{Im}$};
+  \draw[densely dashed,gray] (2,1) -- (2,0);
+  \draw[densely dashed,gray] (2,-1) -- (2,0);
+  \draw[->,blue!70!black,very thick] (0,0) -- (2,1)
+    node[above right] {$z=2+i$};
+  \draw[->,orange!85!black,very thick] (0,0) -- (2,-1)
+    node[below right] {$\overline z=2-i$};
+  \draw[<->,red!70!black,thick] (2.3,-1) -- (2.3,1)
+    node[midway,right] {$2|\operatorname{Im}z|$};
+  \node[below left] at (0,0) {$0$};
+  \node[above left] at (1.0,0.5) {$|z|=\sqrt{5}$};
+\end{tikzpicture}

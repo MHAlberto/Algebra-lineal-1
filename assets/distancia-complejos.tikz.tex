@@ -1,0 +1,17 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  line cap=round,
+  line join=round
+]
+  \draw[->,gray] (-0.35,0) -- (3.2,0) node[right] {$\operatorname{Re}$};
+  \draw[->,gray] (0,-0.35) -- (0,2.8) node[above] {$\operatorname{Im}$};
+  \draw[densely dashed,gray] (2,1) -- (2,0);
+  \draw[densely dashed,gray] (1,2) -- (1,0);
+  \fill[blue!70!black] (2,1) circle (1.7pt)
+    node[below right] {$z=2+i$};
+  \fill[orange!85!black] (1,2) circle (1.7pt)
+    node[above left] {$w=1+2i$};
+  \draw[<->,red!70!black,very thick] (2,1) -- (1,2)
+    node[midway,above right] {$d(z,w)=|z-w|=\sqrt{2}$};
+\end{tikzpicture}

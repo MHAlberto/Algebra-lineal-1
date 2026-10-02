@@ -1,0 +1,16 @@
+\begin{tikzpicture}[
+  >=Latex,
+  font=\small,
+  line cap=round,
+  line join=round
+]
+  \draw[->,gray] (-1.55,0) -- (1.65,0) node[right] {$\operatorname{Re}$};
+  \draw[->,gray] (0,-1.45) -- (0,1.45) node[above] {$\operatorname{Im}$};
+  \draw[gray!60] (0,0) circle (1);
+  \foreach \ang/\lab/\pos in {0/$1$/right,120/$\omega$/above left,240/$\omega^2$/below left} {
+    \draw[->,blue!65!black,thick] (0,0) -- (\ang:1);
+    \fill[blue!65!black] (\ang:1) circle (1.6pt);
+    \node[\pos] at (\ang:1.14) {\lab};
+  }
+  \node[align=center] at (0,-1.85) {$\omega^3=1$\\tres raíces sobre la circunferencia unitaria};
+\end{tikzpicture}
